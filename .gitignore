@@ -5,7 +5,8 @@
 !.gitignore
 
 # protocol files
-!protocol_manager.py
+!protocol
+!protocol/*
 
 # main file
 !ircsome.py
