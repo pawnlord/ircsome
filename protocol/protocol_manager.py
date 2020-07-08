@@ -10,6 +10,8 @@ class protocol_manager:
         self.s.settimeout(1.0)
 
 
+        self.channel = ""
+    
         # try twice, sometimes takes that long
         for i in [0, 1]:
             self.get_message(10240)
@@ -18,34 +20,34 @@ class protocol_manager:
         self.get_message(1024)
         
         self.s.send(("NICK " + NICK).encode('utf-8'))
-        try:
-            returned = self.s.recv(1024).decode() 
-            print(returned, end='')
-            self.s.send(("PONG" + returned[len("PONG"):]).encode('utf-8'))
-        except socket.timeout:
-            print("Timeout detected, moving on");
+        self.get_message(1024)
 
 
         self.s.send(("USER " + USERNAME + " 0 * :" + REALNAME).encode('utf-8'))
         self.get_message(20480)
-
-        self.channel = ""
-    
     def send_message(self, msg):
         if len(msg) > 0:
-            if msg[:5].lower() == "!join":
-                self.channel = msg[6:]
-            elif msg[0] == '!':
-                msg = msg[1:]
+            if self.channel == "":
+                if msg[:5].lower() == "!join" or msg[:4].lower() == "join" :
+                    self.channel = msg.split(' ')[1]
+                pass
             else:
-                if self.channel == "":
-                    print("ircsome: Not in a channel! use !join <channel> to join one!")
-                    return
-                msg = "PRIVMSG " + self.channel + " " + msg
+                if msg[:5].lower() == "!join":
+                    self.channel = msg[6:]
+                if msg[0] == '!':
+                    msg = msg[1:]
+                else:
+                    msg = "PRIVMSG " + self.channel + " " + msg
+        print("sending message " + msg)
         self.s.send((msg + '\r\n').encode('utf-8'))
     
     def get_message(self, size):
         try:
-            print(self.s.recv(size).decode(), end='')
+            msg = self.s.recv(size).decode()
+            if "PING" in msg:
+                print("PING FOUND")
+                return_msg = "PONG :" + msg.split(':')[1].split('\r')[0]
+                self.send_message(return_msg)
+            print(msg, end='')
         except socket.timeout:
             pass
