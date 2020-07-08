@@ -1,18 +1,63 @@
 import socket
 s = socket.socket()
-server_ip = input("Server ip? ")
-port = int(input("Server port? ")) # irc port
+server_ip = '127.0.0.1'# input("Server ip? ")
+port = 6667 # int(input("Server port? ")) # irc port
+
+PASS = input("Password? ") + '\r\n'
+NICK = input("Nickname? ") + '\r\n'
+USERNAME = input("Username? ")
+REALNAME = input("Realname? ") + '\r\n'
 
 s.connect((server_ip, port))
-s.settimeout(5.0)
-i = 0
-def main():
+s.settimeout(1.0)
+
+
+# try twice, sometimes takes that long
+for i in [0, 1]:
     try:
-        print(s.recv(1024).decode())
+        print(s.recv(1024).decode(), end='')
     except socket.timeout:
         print("Timeout detected, moving on");
-    s.send((input("send?") + '\r\n').encode('utf-8'))
-    return True
+
+s.send(("PASS " + PASS).encode('utf-8'))
+try:
+    print(s.recv(1024).decode(), end='')
+except socket.timeout:
+    print("Timeout detected, moving on");
+
+print("PASS SENT")
+
+s.send(("NICK " + NICK).encode('utf-8'))
+try:
+    returned = s.recv(1024).decode() 
+    print(returned, end='')
+    s.send(("PONG" + returned[len("PONG"):]).encode('utf-8'))
+except socket.timeout:
+    print("Timeout detected, moving on");
+
+
+s.send(("USER " + USERNAME + " 0 * :" + REALNAME).encode('utf-8'))
+try:
+    print(s.recv(1024).decode(), end='')
+except socket.timeout:
+    print("Timeout detected, moving on");
+
+
+i = 0
+def main():
+    running = True
+    try:
+        print(s.recv(10240).decode(), end='')
+    except socket.timeout:
+        print("Timeout detected, moving on");
+    try: 
+        msg = input("send?")
+    except KeyboardInterrupt:
+        msg = "QUIT"
+        running = False
+    s.send((msg + '\r\n').encode('utf-8'))
+    
+    return running
 
 if __name__ == "__main__":
     running = True
