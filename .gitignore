@@ -1,0 +1,11 @@
+# Remove all
+*
+
+# this file
+!.gitignore
+
+# protocol files
+!protocol_manager.py
+
+# main file
+!ircsome.py
