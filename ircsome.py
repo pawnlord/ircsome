@@ -23,7 +23,9 @@ def main():
         running = False
 
     manager.send_message(msg)
-    
+    if msg.lower() == "!quit":
+        running = False
+
     return running
 
 if __name__ == "__main__":

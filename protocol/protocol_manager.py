@@ -1,5 +1,7 @@
 import socket
 
+
+
 class protocol_manager:
     def __init__(self, ip, port, PASS, NICK, USERNAME, REALNAME):
         self.s = socket.socket()
@@ -31,11 +33,14 @@ class protocol_manager:
     
     def send_message(self, msg):
         if len(msg) > 0:
-            if msg[:4].lower() == "join":
-                self.channel = msg[5:]
+            if msg[:5].lower() == "!join":
+                self.channel = msg[6:]
             elif msg[0] == '!':
                 msg = msg[1:]
             else:
+                if self.channel == "":
+                    print("ircsome: Not in a channel! use !join <channel> to join one!")
+                    return
                 msg = "PRIVMSG " + self.channel + " " + msg
         self.s.send((msg + '\r\n').encode('utf-8'))
     
