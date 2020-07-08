@@ -44,14 +44,25 @@ except socket.timeout:
 
 
 i = 0
+channel = ""
 def main():
+    global channel
     running = True
     try:
         print(s.recv(10240).decode(), end='')
     except socket.timeout:
         print("Timeout detected, moving on");
-    try: 
+    
+    try:
         msg = input("send?")
+        if not len(msg) == 0:
+            if msg[:4] == "JOIN":
+                channel = msg[5:]
+            elif msg[0] == '!':
+                msg = msg[1:]
+            else:
+                msg = "PRIVMSG " + channel + " " + msg
+
     except KeyboardInterrupt:
         msg = "QUIT"
         running = False
