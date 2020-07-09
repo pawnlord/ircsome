@@ -80,11 +80,12 @@ class protocol_manager:
             user = ""
             if '!' in msg and not '001' in msg:
                 user = msg.split('!')[0][1:]
-                msg = "<{}>: ".format(user) + msg.split(':')[2]
+                msg = "\x1b[34m<{}>:\x1b[31m ".format(user) + msg.split(':')[2]
             
             # add a eol to a message that doesn't have it
             if msg[-1] != '\n':
                 msg+='\n'
+            msg += "\x1b[0m"
             # output message
             print(msg, end='')
         except socket.timeout:

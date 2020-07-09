@@ -26,8 +26,12 @@ Once in, syntax is as follows:
 Orderd in how quickly they will be done.
 
 ### bugs:
-- Not all PING messages are being returned with a PONG, which disconnects you from a server.
+- PING messages are only being returned when you send another message. This relates to the 2nd need.
 
 ### needs:
 - Separate channel messages from pm's  
 - Asynchronous messages (messages while you're typing a message) would be nice, but `input` is still annoying so I'd have to rewrite it, or do some really wild asychronous programming by using 2 different processes.
+- Add a config. 
+
+### unknowns:
+- Colors might create errors on unsupported systems. Add this to the config.
