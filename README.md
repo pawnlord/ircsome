@@ -30,8 +30,9 @@ Orderd in how quickly they will be done.
 
 ### needs:
 - Separate channel messages from pm's  
+- Add a config (partially done).
 - Asynchronous messages (messages while you're typing a message) would be nice, but `input` is still annoying so I'd have to rewrite it, or do some really wild asychronous programming by using 2 different processes.
-- Add a config. 
+- Actual ssl encryption (hardest thing here). 
 
 ### unknowns:
 - Colors might create errors on unsupported systems. Add this to the config.

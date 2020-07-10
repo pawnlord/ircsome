@@ -8,6 +8,9 @@
 !protocol
 !protocol/*
 
+# config file
+!config_manager.py
+
 # main file
 !ircsome.py
 
