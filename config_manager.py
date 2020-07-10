@@ -13,8 +13,8 @@ class config:
                 current_point = s
             elif len(s.split('\n')) > 1:
                 self.data[current_point].append(s.split('\n')[0])
-                self.data[s.split('\n')[1]] = []
-                current_point = s.split('\n')[1]
+                self.data[s.split('\n')[-1]] = []
+                current_point = s.split('\n')[-1]
             else:
                 self.data[current_point].append(s)
     def get_point(self, datapoint, default=[]):
