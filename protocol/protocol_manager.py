@@ -3,7 +3,7 @@ import socket
 
 # Manages any protocol commands (PRIVMSG, JOIN, PING/PONG)
 class protocol_manager:
-    def __init__(self, ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr):
+    def __init__(self, ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr, cmd_str, pm_str):
         # socket
         self.s = socket.socket()
 
@@ -38,6 +38,9 @@ class protocol_manager:
         self.name_clr = name_clr
         self.text_clr = text_clr
         
+        self.cmd_str = cmd_str
+        self.pm_str = pm_str
+
     def send_message(self, msg, format):
         # some messages are just commands
         if format:
@@ -45,20 +48,20 @@ class protocol_manager:
             if len(msg) > 0:
                 # if there isn't a channel, still check for a join
                 if self.channel == "":
-                    if msg[:5].lower() == "!join" or msg[:4].lower() == "join" :
+                    if msg[:len(self.cmd_str)+len("join")].lower() == self.cmd_str + "join" or msg[:len("join")].lower() == "join" :
                         self.last_channel = self.channel
                         self.channel = msg.split(' ')[1]
                     
                 else: # Main formatting
                     # get channel we joined
-                    if msg[:5].lower() == "!join":
+                    if msg[:len(self.cmd_str)+len("join")].lower() == self.cmd_str + "join":
                         self.last_channel = self.channel
                         self.channel = msg[6:]
                     # special character to send a normal message
-                    if msg[0] == '!':
-                        msg = msg[1:]
-                    elif msg[0] == '@': # send a pm to someone
-                        msg = "PRIVMSG " + msg[1:]
+                    if msg[:len(self.cmd_str)] == self.cmd_str:
+                        msg = msg[len(self.cmd_str):]
+                    elif msg[:len(self.pm_str)] == self.pm_str: # send a pm to someone
+                        msg = "PRIVMSG " + msg[len(self.pm_str):]
                     else: # send message to channel
                         msg = "PRIVMSG " + self.channel + " " + msg
         # send message in a way it's acceptable

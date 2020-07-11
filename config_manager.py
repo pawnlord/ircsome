@@ -19,6 +19,6 @@ class config:
                 self.data[current_point].append(s)
     def get_point(self, datapoint, default=[]):
         if not datapoint in self.data:
-            print("ircsome: Couldn't find '" + datapoint + "' in config. Defaulting.")
+            print("ircsome: Couldn't find '" + datapoint + "' in config. Defaulting to " + default + ".")
             return default
         return self.data[datapoint]

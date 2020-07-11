@@ -8,8 +8,9 @@
 !protocol
 !protocol/*
 
-# config file
+# config files
 !config_manager.py
+!default.cfg
 
 # main file
 !ircsome.py

@@ -24,6 +24,10 @@ name_clr = COLORS[cfg.get_point("NAME_COLOR", default=["NONE"])[0]]
 text_clr = COLORS[cfg.get_point("TEXT_COLOR", default=["NONE"])[0]]
 channel_clr = COLORS[cfg.get_point("CHANNEL_COLOR", default=["NONE"])[0]]
 
+
+cmd_str = cfg.get_point("CMD_STR", default=["!"])[0]
+pm_str = cfg.get_point("PM_STR", default=["@"])[0]
+
 print(cfg.get_point("NAME_COLOR", default=["NONE"])[0])
 
 clear_clr =  "\x1b[0m"
@@ -42,7 +46,7 @@ USERNAME = input(input_clr + "Username? " + clear_clr)
 REALNAME = input(input_clr + "Realname?\x1b[0m " + clear_clr) 
 
 # Manages protocol
-manager = pm.protocol_manager(server_ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr)
+manager = pm.protocol_manager(server_ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr, cmd_str, pm_str)
 
 i = 0
 # main function
@@ -53,7 +57,7 @@ def main():
 
     # try to get input. If there's a Keyboard interrupt, quit
     try:
-        msg = input( name_clr + "<" + NICK + ">" + channel_clr + " (" + manager.channel + "):\x1b[0m ")
+        msg = input( name_clr + "<" + NICK + ">" + channel_clr + " (" + manager.channel + "): " + clear_clr)
     except KeyboardInterrupt:
         msg = "!QUIT"
         running = False
