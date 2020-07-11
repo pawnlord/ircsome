@@ -34,16 +34,17 @@ Once in, syntax is as follows:
 ## config
 The config can be used to customize ircsome. It is stored in `default.cfg`, so any changes should be done to that.  
 The available config options go as follows:  
-- **TITLE_COLOR:** color to be used for the introduction title, available colors are RED, YELLOW, BLUE, ORANGE, PURPLE, LIGHT_BLUE, and NONE  
-- **BODY_COLOR:** color to be used for introduction paragraph  
+- **TITLE_COLOR:** color to be used for the introduction title.  
+- **BODY_COLOR:** color to be used for introduction paragraph.  
 - **INPUT_COLOR:** color to be used when asking for non-message related info (password, nickname, username, and real name)  
 - **NAME_COLOR:** color to be used for names (your`s and others).  
 - **TEXT_COLOR:** color to be used for message text.  
 - **CHANNEL_COLOR:** color to indicate the channel next to your name.  
+    - **Available Colors** include RED, BRIGHT_RED,  ORANGE (not on powershell), YELLOW, BLUE, BRIGHT_BLUE, PURPLE (dark blue on powershell), BRIGHT_PURPLE, CYAN, BRIGHT_CYAN, and NONE  
 - **CMD_STR:** string to start writing a command instead of message  
 - **PM_STR:** string to start writing a private message instead of message  
 - **DEFAULT_IP:** default IP for server if none is provided (this is mainly for easier testing).  
-- **DEFAULT_PORT:** default port for server if none is provided.  
+- **DEFAULT_PORT:** default port for server if none is provided.    
 
 For example, if you wanted to set `TITLE_COLOR` to `RED`, simply type `TITLE_COLOR RED` into the config file.  
 If you had multiple things setting `TITLE_COLOR`, the last one in the file would be used.  
@@ -58,6 +59,4 @@ Orderd in how quickly they will be done.
 - Separate channel messages from pm's   
 - Asynchronous messages (messages while you're typing a message) would be nice, but `input` is still annoying so I'd have to rewrite it, or do some really wild asychronous programming by using 2 different processes.  
 - Actual ssl encryption (hardest thing here).  
-
-### unknowns:
-- Colors might create errors on unsupported systems. Add this to the config.  
+ 

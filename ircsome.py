@@ -6,8 +6,8 @@ import sys
 cfg = cm.config("default.cfg")
 
 # Port and ip
-server_ip = cfg.get_point("DEFAULT_IP", default=["127.0.0.1"])[0] # input("Server ip? ")
-port = int(cfg.get_point("DEFAULT_PORT", default=["6667"])[0]) # int(input("Server port? ")) # irc port
+server_ip = cfg.get_datapoint("DEFAULT_IP", default=["127.0.0.1"])[0] # input("Server ip? ")
+port = int(cfg.get_datapoint("DEFAULT_PORT", default=["6667"])[0]) # int(input("Server port? ")) # irc port
 
 for i in range(len(sys.argv)):
     if sys.argv[i] == '-p':
@@ -39,17 +39,17 @@ COLORS = {"RED" : "\x1b[31m",
 "NONE" : "\x1b[0m"}
 
 # get config file data
-title_clr = COLORS[cfg.get_point("TITLE_COLOR", default=["NONE"])[0]]
-body_clr = COLORS[cfg.get_point("BODY_COLOR", default=["NONE"])[0]]
-input_clr = COLORS[cfg.get_point("INPUT_COLOR", default=["NONE"])[0]]
+title_clr = COLORS[cfg.get_datapoint("TITLE_COLOR", default=["NONE"])[0]]
+body_clr = COLORS[cfg.get_datapoint("BODY_COLOR", default=["NONE"])[0]]
+input_clr = COLORS[cfg.get_datapoint("INPUT_COLOR", default=["NONE"])[0]]
 
-name_clr = COLORS[cfg.get_point("NAME_COLOR", default=["NONE"])[0]]
-text_clr = COLORS[cfg.get_point("TEXT_COLOR", default=["NONE"])[0]]
-channel_clr = COLORS[cfg.get_point("CHANNEL_COLOR", default=["NONE"])[0]]
+name_clr = COLORS[cfg.get_datapoint("NAME_COLOR", default=["NONE"])[0]]
+text_clr = COLORS[cfg.get_datapoint("TEXT_COLOR", default=["NONE"])[0]]
+channel_clr = COLORS[cfg.get_datapoint("CHANNEL_COLOR", default=["NONE"])[0]]
 
 
-cmd_str = cfg.get_point("CMD_STR", default=["!"])[0]
-pm_str = cfg.get_point("PM_STR", default=["@"])[0]
+cmd_str = cfg.get_datapoint("CMD_STR", default=["!"])[0]
+pm_str = cfg.get_datapoint("PM_STR", default=["@"])[0]
 
 clear_clr =  "\x1b[0m"
 
