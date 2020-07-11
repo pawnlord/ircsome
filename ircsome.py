@@ -56,10 +56,10 @@ clear_clr =  "\x1b[0m"
 
 # don't ask why, lets me have colored text
 os.system('')
-print(title_clr +"!!~~~~~~~~~~~~~~~~~~~~Welcome to IRCsome~~~~~~~~~~~~~~~~~~~~!!" + clear_clr)
-print(body_clr + "          A simple irc client for your command line!          ")
-print("    version 1.0.0. made by pawnlord (github.com/pawnlord).         ")
-print("  First, input some important information needed to register  " + clear_clr)
+print(title_clr + "!!~~~~~~~~~~~~~~~~~~~~Welcome to IRCsome~~~~~~~~~~~~~~~~~~~~!!" + clear_clr)
+print(body_clr +  "          A simple irc client for your command line!          ")
+print(            "    version 1.0.0. made by pawnlord (github.com/pawnlord).    ")
+print(            "  First, input some important information needed to register  "   + clear_clr)
 # Needed to register
 PASS = input(input_clr + "Password? " + clear_clr)
 NICK = input(input_clr + "Nickname? " + clear_clr)

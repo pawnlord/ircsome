@@ -22,7 +22,6 @@ class protocol_manager:
             self.get_message(10240)
 
         # Register account
-
         # password
         self.send_message("PASS " + PASS, format=False)
         self.get_message(1024)
@@ -30,6 +29,7 @@ class protocol_manager:
         # nickname
         self.send_message("NICK " + NICK, format=False)
         self.get_message(1024)
+        self.name = NICK
 
         # username and realname
         self.send_message("USER " + USERNAME + " 0 * :" + REALNAME, format=False)
@@ -84,10 +84,11 @@ class protocol_manager:
                 self.channel = self.last_channel
             # format a normal message
             user = ""
-            if '!' in msg and not '001' in msg:
-                user = msg.split('!')[0][1:]
+            if '!' in info and not '001' in info and not 'JOIN' in info:
+                user = info.split('!')[0]
                 msg = self.name_clr + "<{}>:{} ".format(user, self.text_clr) + msg.split(':')[2]
-            
+                if self.name in info and not '#' in info:
+                    msg = "(PM) " + msg
             # add a eol to a message that doesn't have it
             if msg[-1] != '\n':
                 msg+='\n'
