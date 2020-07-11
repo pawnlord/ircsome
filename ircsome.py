@@ -1,6 +1,6 @@
 from protocol import protocol_manager as pm
+from utilities import config_manager as cm
 import os
-import config_manager as cm
 import sys
 
 cfg = cm.config("default.cfg")
@@ -23,8 +23,6 @@ for i in range(len(sys.argv)):
             exit()
         server_ip = sys.argv[i]
 
-print(port, type(port))
-print(server_ip, type(server_ip))
 
 COLORS = {"RED" : "\x1b[31m",
 "BLUE" : "\x1b[34m",

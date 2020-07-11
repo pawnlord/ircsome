@@ -9,7 +9,11 @@
 !protocol/*
 
 # config files
-!config_manager.py
+!utilities
+!utilities/config_manager.py
+
+!configs
+!configs/*
 !default.cfg
 
 # main file
