@@ -25,11 +25,17 @@ for i in range(len(sys.argv)):
 
 
 COLORS = {"RED" : "\x1b[31m",
+"LIGHT_RED" : "\x1b[91m",
 "BLUE" : "\x1b[34m",
-"YELLOW" : "\x1b[32m",
-"LIGHT_BLUE" : "\x1b[36m",
+"BRIGHT_BLUE" : "\x1b[96m",
+"GREEN" : "\x1b[32m",
+"BRIGHT_GREEN" : "\x1b[92m",
+"CYAN" : "\x1b[36m",
+"BRIGHT_CYAN" : "\x1b[96m",
 "PURPLE" : "\x1b[35m",
+"BRIGHT_PURPLE" : "\x1b[95m",
 "ORANGE" : "\x1b[33m",
+"YELLOW" : "\x1b[93m",
 "NONE" : "\x1b[0m"}
 
 # get config file data
