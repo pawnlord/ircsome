@@ -1,10 +1,30 @@
 from protocol import protocol_manager as pm
 import os
 import config_manager as cm
+import sys
+
+cfg = cm.config("default.cfg")
+
 # Port and ip
-# TODO: make these changable
-server_ip = '127.0.0.1'# input("Server ip? ")
-port = 6667 # int(input("Server port? ")) # irc port
+server_ip = cfg.get_point("DEFAULT_IP", default=["127.0.0.1"])[0] # input("Server ip? ")
+port = int(cfg.get_point("DEFAULT_PORT", default=["6667"])[0]) # int(input("Server port? ")) # irc port
+
+for i in range(len(sys.argv)):
+    if sys.argv[i] == '-p':
+        i+=1
+        if i >= len(sys.argv):
+            print('ircsome: -p needs port!')
+            exit()
+        port = int(sys.argv[i])
+    if sys.argv[i] == '-a':
+        i+=1
+        if i >= len(sys.argv):
+            print('ircsome: -a needs address!')
+            exit()
+        server_ip = sys.argv[i]
+
+print(port, type(port))
+print(server_ip, type(server_ip))
 
 COLORS = {"RED" : "\x1b[31m",
 "BLUE" : "\x1b[34m",
@@ -15,7 +35,6 @@ COLORS = {"RED" : "\x1b[31m",
 "NONE" : "\x1b[0m"}
 
 # get config file data
-cfg = cm.config("default.cfg")
 title_clr = COLORS[cfg.get_point("TITLE_COLOR", default=["NONE"])[0]]
 body_clr = COLORS[cfg.get_point("BODY_COLOR", default=["NONE"])[0]]
 input_clr = COLORS[cfg.get_point("INPUT_COLOR", default=["NONE"])[0]]
@@ -27,8 +46,6 @@ channel_clr = COLORS[cfg.get_point("CHANNEL_COLOR", default=["NONE"])[0]]
 
 cmd_str = cfg.get_point("CMD_STR", default=["!"])[0]
 pm_str = cfg.get_point("PM_STR", default=["@"])[0]
-
-print(cfg.get_point("NAME_COLOR", default=["NONE"])[0])
 
 clear_clr =  "\x1b[0m"
 
