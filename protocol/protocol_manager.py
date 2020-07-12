@@ -3,7 +3,7 @@ import socket
 
 # Manages any protocol commands (PRIVMSG, JOIN, PING/PONG)
 class protocol_manager:
-    def __init__(self, ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr, cmd_str, pm_str):
+    def __init__(self, ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr, channel_clr, cmd_str, pm_str):
         # socket
         self.s = socket.socket()
 
@@ -37,6 +37,7 @@ class protocol_manager:
 
         self.name_clr = name_clr
         self.text_clr = text_clr
+        self.channel_clr = channel_clr
         
         self.cmd_str = cmd_str
         self.pm_str = pm_str
@@ -86,9 +87,12 @@ class protocol_manager:
             user = ""
             if '!' in info and not '001' in info and not 'JOIN' in info:
                 user = info.split('!')[0]
+                channel = info.split(' ')[2]
                 msg = self.name_clr + "<{}>:{} ".format(user, self.text_clr) + msg.split(':')[2]
                 if self.name in info and not '#' in info:
-                    msg = "(PM) " + msg
+                    msg = self.channel_clr + "(PM) " + msg
+                elif self.channel != channel:
+                    msg = self.channel_clr + "({}) ".format(channel) + msg
             # add a eol to a message that doesn't have it
             if msg[-1] != '\n':
                 msg+='\n'

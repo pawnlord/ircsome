@@ -67,7 +67,7 @@ USERNAME = input(input_clr + "Username? " + clear_clr)
 REALNAME = input(input_clr + "Realname?\x1b[0m " + clear_clr) 
 
 # Manages protocol
-manager = pm.protocol_manager(server_ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr, cmd_str, pm_str)
+manager = pm.protocol_manager(server_ip, port, PASS, NICK, USERNAME, REALNAME, name_clr, text_clr, channel_clr, cmd_str, pm_str)
 
 i = 0
 # main function
